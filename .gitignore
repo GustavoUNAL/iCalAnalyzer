@@ -23,7 +23,8 @@ var/
 # Environment variables
 .env
 .env.*
-
+.env.dashboard
+.env.dashboard.*
 # IDE
 .idea/
 .vscode/

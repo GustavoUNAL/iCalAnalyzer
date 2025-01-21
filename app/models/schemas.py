@@ -1,7 +1,6 @@
-# app/models/schemas.py
 from pydantic import BaseModel
-from datetime import datetime
 from typing import List, Optional
+from datetime import datetime
 
 class Event(BaseModel):
     title: str
@@ -17,9 +16,19 @@ class CalendarStats(BaseModel):
     average_duration: float
 
 class TimeAnalysis(BaseModel):
+    total_events: int = 0
+    total_hours: float = 0.0
+    events_by_calendar: List[CalendarStats] = []
+    most_common_duration: float = 0.0
+    busiest_day: str = "N/A"
+    busiest_hour: int = 0
+
+class CalendarResponse(BaseModel):
+    status: str
+    calendars: List[str]
+
+class EventAnalysis(BaseModel):
+    events_by_day: dict
+    most_common_events: dict
     total_events: int
     total_hours: float
-    events_by_calendar: List[CalendarStats]
-    most_common_duration: float
-    busiest_day: str
-    busiest_hour: int

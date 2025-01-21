@@ -44,3 +44,11 @@ http://localhost:8000/api/v1/productive-hours/
 
 # Con fechas específicas
 http://localhost:8000/api/v1/productive-hours/?start_date=2024-01-01&end_date=2024-01-31
+
+
+# Primero, asegúrate de que tu API FastAPI esté corriendo
+# En una terminal:
+uvicorn app.main:app --reload
+
+# En otra terminal, inicia el dashboard:
+python -m dashboard.app
