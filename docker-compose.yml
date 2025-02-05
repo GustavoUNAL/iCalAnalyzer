@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - app-network
+
+  dashboard:
+    build: .
+    container_name: dashboard
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python3.11 -m dashboard.app
+    ports:
+      - "8050:8050"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_BASE_URL=http://backend:8000/api/v1
+      - DASH_HOST=0.0.0.0
+      - DASH_PORT=8050
+      - DASH_DEBUG=True
+      - DASH_TITLE=Calendar Analytics Dashboard
+      - THEME_BOOTSTRAP=BOOTSTRAP
+      - PRIMARY_COLOR=#007bff
+      - SECONDARY_COLOR=#6c757d
+      - CACHE_TIMEOUT=300
+      - LOG_LEVEL=INFO
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

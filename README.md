@@ -51,4 +51,4 @@ http://localhost:8000/api/v1/productive-hours/?start_date=2024-01-01&end_date=20
 uvicorn app.main:app --reload
 
 # En otra terminal, inicia el dashboard:
-python -m dashboard.app
+python3.11 -m dashboard.app
